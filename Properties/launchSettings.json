@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "CamadaExample": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:3007",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
