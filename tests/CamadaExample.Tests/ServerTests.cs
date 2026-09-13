@@ -183,6 +183,7 @@ public class ServerTests
     public async Task TheKillSwitchBypassesTheSdk()
     {
         using var b = new Bench();
+        Assert.NotNull(Bench.Header(await b.Get("/"), "x-rid"));   // the engine is built and active before the switch flips
         Environment.SetEnvironmentVariable("CAMADA_DISABLED", "1");   // read per request: no restart needed
         try
         {
