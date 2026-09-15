@@ -7,11 +7,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { path: camada-dotnet-example }
       # Camada is a ProjectReference to the sibling checkout; the SDK vendors its own beacon build.
-      - uses: actions/checkout@v4
-        with: { repository: ${{ github.repository_owner }}/camada-dotnet, path: camada-dotnet }
+      - uses: actions/checkout@v7
+        with:
+          repository: ${{ github.repository_owner }}/camada-dotnet
+          path: camada-dotnet
       - uses: actions/setup-dotnet@v4
         with: { global-json-file: camada-dotnet-example/global.json }
       - run: dotnet format --verify-no-changes CamadaExample.csproj && dotnet format --verify-no-changes tests/CamadaExample.Tests
