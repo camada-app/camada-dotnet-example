@@ -150,12 +150,13 @@ public class ServerTests
     }
 
     [Fact]
-    public async Task ChallengeMeAnswersJsonToAnApiClient()
+    public async Task ChallengeMeSignalsAnApiClient()
     {
         using var b = new Bench();
         var r = await b.Get("/challenge-me", ("x-forwarded-for", "198.51.100.7"));
-        Assert.Equal(HttpStatusCode.Forbidden, r.StatusCode);
-        Assert.Equal("challenge_required", JsonDocument.Parse(await r.Content.ReadAsStringAsync()).RootElement.GetProperty("error").GetString());
+        Assert.Equal(HttpStatusCode.OK, r.StatusCode);
+        Assert.Equal("1", Bench.Header(r, "x-camada-challenge"));
+        Assert.Equal("no-store", Bench.Header(r, "cache-control"));
     }
 
     [Fact]
